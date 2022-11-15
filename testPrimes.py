@@ -4,7 +4,7 @@ import unittest
   # Todos os primos > 3 possuem a forma 6n ± 1
   # primos inferiores a ou iguais a 3 => 2,3
   # Testar para 2, testar para 3 (edge cases)
-  # testar para os primeiros 100000 primos (excepto 2 e 3) com base num dataset de primos
+  # testar para os primeiros 10000 numeros (excepto 2 e 3 cases) com base num dataset de primos
   # testei uma função com o mesmo propósito feita por mim para termo de comparação e sanidade
 
 class TestPrimes(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestPrimes(unittest.TestCase):
         self.assertEqual(primes(4), [False, False, True, True])
 
     def testIsPrimeAfterThree(self):
-        primesArr = [False] * 1299710
+        primesArr = [False] * 1010
 
         with open('P-100000.txt') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
@@ -34,9 +34,9 @@ class TestPrimes(unittest.TestCase):
         self.assertEqual(goodPrimes(4), [False, False, True, True])
 
     def testIsGoodPrimeAfterThree(self):
-        primesArr = [False] * 1299710
+        primesArr = [False] * 1010
 
-        with open('P-100000.txt') as csv_file:
+        with open('P-1000.txt') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
                 primesArr[int(row[1])] = True
