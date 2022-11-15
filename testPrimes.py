@@ -15,16 +15,16 @@ class TestPrimes(unittest.TestCase):
     def testIsPrimeThree(self):
         self.assertEqual(primes(4), [False, False, True, True])
 
-    def testIsPrimeAfterThree(self):
+    def testIsPrimeThousand(self):
         primesArr = [False] * 1010
 
-        with open('P-100000.txt') as csv_file:
+        with open('P-1000.txt') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
                 primesArr[int(row[1])] = True
 
-        for n in range(5,len(primesArr)):
-            self.assertEqual(primes(n), primesArr[:n])
+        
+        self.assertEqual(primes(1010), primesArr[:1010])
 
 
     def testIsGoodPrimeTwo(self):
@@ -33,7 +33,7 @@ class TestPrimes(unittest.TestCase):
     def testIsGoodPrimeThree(self):
         self.assertEqual(goodPrimes(4), [False, False, True, True])
 
-    def testIsGoodPrimeAfterThree(self):
+    def testIsGoodPrimeThousand(self):
         primesArr = [False] * 1010
 
         with open('P-1000.txt') as csv_file:
@@ -43,8 +43,8 @@ class TestPrimes(unittest.TestCase):
 
         primesArr[2] = True
         primesArr[3] = True
-        for n in range(2,len(primesArr)):
-            self.assertEqual(goodPrimes(n), primesArr[:n])
+        
+        self.assertEqual(goodPrimes(1010), primesArr[:1010])
 
 
 def primes(n):
