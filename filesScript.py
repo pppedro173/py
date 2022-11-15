@@ -69,6 +69,25 @@ def main():
     print("B1.5")
     print("++++++++++++++++++++++++++++++++++++++++++")
 
+    with open("localisations_1_2_0.plist", 'rb') as fp:
+        pl = plistlib.load(fp)
+
+    listOfListsA2 = list()
+    listOfListsB2 = list()
+
+    for key in fileKeysA:
+        for langCode in pl["localisations"][key]:
+            listOfListsA2.append({key:{langCode: pl["localisations"][key][langCode]}})
+
+    with open("localisations_1_2_1.plist", 'rb') as fp:
+        pl = plistlib.load(fp)
+
+    for key in fileKeysB:
+        for langCode in pl["localisations"][key]:
+            listOfListsB2.append({key:{langCode: pl["localisations"][key][langCode]}})
+
+    #todo get modified One => How ? key -> {key} -> text search for key -> {key} if exists check text if diff print
+
 
 if __name__ == '__main__':
    main()
