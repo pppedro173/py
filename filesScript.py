@@ -24,15 +24,16 @@ def createLangCodesList(filename, fileKeys):
     return listOfLists
 
 def createSentencesAssociativeList(fileKeys, filename):
-    with open("localisations_1_2_0.plist", 'rb') as fp:
+    listOfLists = list()
+
+    with open(filename, 'rb') as fp:
         pl = plistlib.load(fp)
 
-    listOfListsA2 = list()
-    listOfListsB2 = list()
-
-    for key in fileKeysA:
+    for key in fileKeys:
         for langCode in pl["localisations"][key]:
-            listOfListsA2.append({key:{langCode: pl["localisations"][key][langCode]}})
+            listOfLists.append({key:{langCode: pl["localisations"][key][langCode]}})
+
+    return listOfLists
 
 def keysAdded(fileKeysA, fileKeysB):
     for key in fileKeysB:
@@ -44,6 +45,12 @@ def keysRemoved(fileKeysA, fileKeysB):
         if(key not in fileKeysB):
             print(key)
     
+def modifiedSentences(listOfListsA, lisOfListsB, fileKeysA):
+    for dicItem in lisOfListsB:
+        if(dicItem not in listOfListsA):
+            for key in dicItem:
+                if(key in fileKeysA):
+                    print(dicItem[key])
 
 def main():
     fileKeysA = creatKeysList("localisations_1_2_0.plist", "localisations")
@@ -80,29 +87,9 @@ def main():
     print("B1.5")
     print("++++++++++++++++++++++++++++++++++++++++++")
 
-    with open("localisations_1_2_0.plist", 'rb') as fp:
-        pl = plistlib.load(fp)
-
-    listOfListsA2 = list()
-    listOfListsB2 = list()
-
-    for key in fileKeysA:
-        for langCode in pl["localisations"][key]:
-            listOfListsA2.append({key:{langCode: pl["localisations"][key][langCode]}})
-
-    with open("localisations_1_2_1.plist", 'rb') as fp:
-        pl = plistlib.load(fp)
-
-    for key in fileKeysB:
-        for langCode in pl["localisations"][key]:
-            listOfListsB2.append({key:{langCode: pl["localisations"][key][langCode]}})
-
-    for dicItem in listOfListsB2:
-        if(dicItem not in listOfListsA2):
-            for key in dicItem:
-                if(key in fileKeysA):
-                    print(dicItem[key])
-
+    listOfListsA2 = createSentencesAssociativeList(fileKeysA, "localisations_1_2_0.plist")
+    listOfListsB2 = createSentencesAssociativeList(fileKeysB, "localisations_1_2_1.plist")
+    modifiedSentences(listOfListsA2, listOfListsB2, fileKeysA)
 
 if __name__ == '__main__':
    main()
