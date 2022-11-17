@@ -23,6 +23,17 @@ def createLangCodesList(filename, fileKeys):
     
     return listOfLists
 
+def createSentencesAssociativeList(fileKeys, filename):
+    with open("localisations_1_2_0.plist", 'rb') as fp:
+        pl = plistlib.load(fp)
+
+    listOfListsA2 = list()
+    listOfListsB2 = list()
+
+    for key in fileKeysA:
+        for langCode in pl["localisations"][key]:
+            listOfListsA2.append({key:{langCode: pl["localisations"][key][langCode]}})
+
 def keysAdded(fileKeysA, fileKeysB):
     for key in fileKeysB:
         if(key not in fileKeysA):
@@ -86,7 +97,11 @@ def main():
         for langCode in pl["localisations"][key]:
             listOfListsB2.append({key:{langCode: pl["localisations"][key][langCode]}})
 
-    #todo get modified One => How ? key -> {key} -> text search for key -> {key} if exists check text if diff print
+    for dicItem in listOfListsB2:
+        if(dicItem not in listOfListsA2):
+            for key in dicItem:
+                if(key in fileKeysA):
+                    print(dicItem[key])
 
 
 if __name__ == '__main__':
