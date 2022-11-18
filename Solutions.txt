@@ -1,0 +1,8 @@
+B2.
+
+The localized text strings in  “2b827952-8d1a-4c31-9283-8753d1fc51be” should have the time embedded (e.g.: Starting in % (time) % (timeUnits) ...)
+This allows us to avoid concatenating strings and complicated problems with string structure, grammar and more.
+The localized text strings in "1981dc5a-a6b8-4fd3-be04-052522e08c86" could be more generic, today we want to say "I just reached number 1 in the Country"
+Or "World" but if tomorrow I want to say something like "I just reached number 1 in the region" I can't and I'll need to add another text entry
+, better would be something like "I just reached number % (position) in % (leaderboard)", this way I can add new rankings and use the same sentence for any
+position.
